@@ -7,16 +7,17 @@ cd <folder>
 hugo new site . --force
 
 # theme
-git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+cd themes
+git clone https://github.com/athul/archie.git
 
 # copy config.yaml
 
 # new post
-hugo new --kind post-bundle posts/<yyyy-mm-dd>
+hugo new posts/<yyyy-mm-dd>
 
 # server
 hugo server -D
 
-# build 
+# build
 hugo
 ```
