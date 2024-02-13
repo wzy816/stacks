@@ -239,7 +239,7 @@ git config --global url."https://hub.fgit.cf/".insteadOf "https://github.com/"
     ps= push origin HEAD
     pss= push --set-upstream origin HEAD
     pst= push origin HEAD --tags
-    bomb= !git checkout --orphan newBranch && git add -A && git commit -m "reinit" && git branch -D main && git branch -m main && git push -f origin main && git gc --aggressive --prune=all &&:
+    bomb= !git checkout --orphan newBranch && git add -A && git commit -m "init" && git branch -D main && git branch -m main && git push -f origin main && git gc --aggressive --prune=all &&:
 [color]
     ui = always
 ```
