@@ -113,6 +113,12 @@ kubectl get cronjob
 ```bash
 # describe node
 kubectl describe node minikube
+
+# get nodes name
+kubectl get nodes
+
+# show nodes label
+kubectl get nodes --show-labels
 ```
 
 ## secret
