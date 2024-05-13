@@ -50,9 +50,7 @@ go run cmd/app/main.go
 
 ```bash
 go test
-
 go test -v -run="<FUNCTION>"
-
 go test ./internal/* -v
 ```
 
@@ -62,21 +60,21 @@ go test ./internal/* -v
 package main
 
 import (
-	"fmt"
-	"golang.org/x/crypto/bcrypt"
-	"encoding/base64"
+    "fmt"
+    "golang.org/x/crypto/bcrypt"
+    "encoding/base64"
 )
 
 func main() {
-	encoded := base64.StdEncoding.EncodeToString([]byte("password"))
-	fmt.Println(encoded)
-	err := 	bcrypt.CompareHashAndPassword([]byte("hashed"), []byte(encoded))
-	if err != nil {
-		fmt.Println(err)
-	}else{
-		fmt.Println("OK")
-	}
-	pwd, err:= bcrypt.GenerateFromPassword([]byte("passwordbase64"), 10)
-	fmt.Println(string(pwd))
+    encoded := base64.StdEncoding.EncodeToString([]byte("password"))
+    fmt.Println(encoded)
+    err := 	bcrypt.CompareHashAndPassword([]byte("hashed"), []byte(encoded))
+    if err != nil {
+        fmt.Println(err)
+    }else{
+        fmt.Println("OK")
+    }
+    pwd, err:= bcrypt.GenerateFromPassword([]byte("passwordbase64"), 10)
+    fmt.Println(string(pwd))
 }
 ```
