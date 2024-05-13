@@ -1,44 +1,63 @@
 # go
 
+## init
+
+```bash
+# install
+brew install go
+go version
+
+# init project
+go mod init [repo_name]
+
+# clear mod
+go mod tidy
+```
+
 ## env
 
-```go
-// list env
+```bash
+# list env
 go env
 
-// set env
+# set env
 go env -w GOPATH=$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 
-// 无法安装依赖时
-go env -w GOPROXY=https://goproxy.io,direct
+# 无法安装依赖时
+go env -w GOPROXY=https:#goproxy.io,direct
 go env -w GOSUMDB="sum.golang.google.cn"
 ```
 
 ## basic
 
-```go
-// init go.sum
+```bash
+# init go.sum
 go mod init my-repo
 
-// list selected module versions
+# list selected module versions
 go list -m all
 
-// install module
+# install module
 go get -u github.com/gin-gonic/gin
+
+# run main
+go run cmd/app/main.go
 ```
 
 ## test
-```go
-// run test
+
+```bash
 go test
 
-// run 
 go test -v -run="<FUNCTION>"
+
+go test ./internal/* -v
 ```
 
 ## crypto
+
 ```go
 package main
 
