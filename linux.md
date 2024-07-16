@@ -4,10 +4,10 @@
 
 ```bash
 # check disk
-df -h
+df -hT
 
-# check mounted
-df -HT
+# check disk and mountpoints
+lsblk
 
 # check dir size
 du -h my_dir

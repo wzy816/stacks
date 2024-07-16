@@ -62,7 +62,7 @@ git push origin <branch> --force
 
 ## diff
 
-```
+```bash
 # compare files
 git diff branch1:path/to/file branch2:path/to/file
 git diff branch1name branch2name path/to/file
