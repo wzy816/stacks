@@ -69,12 +69,12 @@ curl 'http://<ip>:8123'
 
 ## compile
 
-build 23.8 on ubuntu 22.04
+build 23.8 on ubuntu 22.04, official [doc](https://github.com/ClickHouse/ClickHouse/blob/23.8/docs/en/development/developer-instruction.md)
 
 ```bash
 sudo apt-get update
 sudo apt-get install git cmake ccache python3 ninja-build nasm yasm gawk lsb-release wget software-properties-common gnupg
-
+sudo apt-get install build-essential
 sudo apt-get install software-properties-common
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt-get update && sudo apt-get upgrade
@@ -89,15 +89,19 @@ clang-16 --version
 
 export CC=clang-16
 export CXX=clang++-16
-ln -s /usr/bin/clang++-16 /usr/bin/c++
-ln -s /usr/bin/clang-16 /usr/bin/cc
+ln -sf /usr/bin/clang++-16 /usr/bin/c++
+ln -sf /usr/bin/clang-16 /usr/bin/cc
 
+# clone
 git clone --recursive --shallow-submodules --branch 23.8 https://github.com/ClickHouse/ClickHouse.git
-
-# clone from custom repo
+# or from custom repo
 # git clone git://[]/ClickHouse.git
-# cd ClickHouse
-# git submodule update --init
+
+# if not behind proxy, run
+# git config --global --unset https.proxy
+cd ClickHouse
+git submodule update --init
+git submodule update --init --force
 
 # build
 cd ClickHouse
@@ -106,11 +110,14 @@ cmake -S . -B build
 cmake --build build -j 16
 
 # cp binary to deploy dir
-cp /mnt/ClickHouse/build/programs/clickhouse /mnt/clickhouse/clickhouse
+mkdir /data/clickhouse/server -p
+cp /data/ClickHouse/build/programs/clickhouse /data/clickhouse/server
+cp /data/ClickHouse/programs/server/config.xml /data/clickhouse/server
+cp /data/ClickHouse/programs/server/users.xml /data/clickhouse/server
 
 # deploy
-<path_to_clickhouse_binary> server --config <path_to_config_xml>
-<path_to_clickhouse_binary> client
+/data/clickhouse/server/clickhouse server --config /data/clickhouse/server/config.xml
+/data/clickhouse/server/clickhouse client
 
 # mysql client
 mysqlsh -u default -h localhost -P 9004 --sql
