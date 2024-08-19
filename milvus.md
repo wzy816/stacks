@@ -41,3 +41,24 @@ text_field, ts_field, vector_field
 
 release collection -c my_collection
 ```
+
+## DiskANN
+
+```bash
+sudo apt install cmake g++ libaio-dev libgoogle-perftools-dev clang-format libboost-dev
+
+sudo apt install libmkl-full-dev
+
+# must support OpenMP
+# llvm 16 not work
+
+sudo ln -sf /usr/bin/g++ /usr/bin/c++
+sudo ln -sf /usr/bin/gcc /usr/bin/cc
+
+# mkl.h is in /usr/include/mkl/
+# so in CMakeLists.txt add
+# include_directories(include /usr/include/mkl)
+
+mkdir build && cd build && cmake .. && make -j
+
+```
