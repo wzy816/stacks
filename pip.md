@@ -1,6 +1,10 @@
 # pip
 
 ```bash
+# install on centos 7.9
+sudo yum install epel-release
+yum -y install python-pip
+
 # update outdated packages
 pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 

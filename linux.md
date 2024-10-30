@@ -396,3 +396,12 @@ wget -c -b [url]
 # check download
 tail wget-log
 ```
+
+## centos 7.9 yum
+
+```bash
+curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+yum makecache
+yum repolist
+```
