@@ -5,35 +5,16 @@
 ```bash
 source activate my_env
 
-# if jupyter not recognize my_env
-conda install jupyter
-conda install nb_conda_kernels
-
-# activate notebook
-jupyter notebook
-
 # install extension
 pip install jupyter_contrib_nbextensions
 jupyter contrib nbextension install --user
 
-# conda env not show in notebook
-# in base env
-conda install nb_conda_kernels
-# in target env
-conda install ipykernel
-# restart notebook, target env will show
+# activate notebook
+jupyter notebook
+
 ```
 
-## lab
-
-```python
-# show module
-help()
-
-# show system
-import platform
-platform.uname()
-```
+## kernel
 
 ```bash
 # create new kernel
@@ -50,6 +31,42 @@ jupyter kernelspec uninstall <old_kernel>
 
 # start jupyter lab
 nohup jupyter lab >/dev/null 2>&1&
+```
+
+### env not show in notebook kernel
+
+```bash
+# in base env
+conda install jupyter
+conda install nb_conda_kernels
+# in target env
+conda install ipykernel
+# restart notebook, target env will show
+```
+
+## notebook
+
+```bash
+# create config
+jupyter notebook --generate-config
+
+# /root/.jupyter/jupyter_notebook_config.py
+# c.NotebookApp.ip = "0.0.0.0"
+# c.NotebookApp.port = 8888
+
+# start
+jupyter notebook --allow-root
+```
+
+## lab
+
+```python
+# show module
+help()
+
+# show system
+import platform
+platform.uname()
 ```
 
 ## support c++

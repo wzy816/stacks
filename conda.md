@@ -35,7 +35,7 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/f
 
 # rename env
 conda create --name new_name --clone old_name
-conda remove --name old_name --all # or conda env remove --name old_name
+conda env remove --name old_name
 ```
 
 ## .condarc
