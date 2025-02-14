@@ -13,10 +13,11 @@ huggingface-cli upload [repo] [local_file_path]
 # upload file to path
 huggingface-cli upload [repo] [local_file_path] [path_in_repo]
 
-# cannot download model
+# cannot download model or slow
 export HF_ENDPOINT=https://hf-mirror.com
+export HF_HUB_DOWNLOAD_TIMEOUT=30
 
-# local dir
+# set local dir
 export HUGGINGFACE_HUB_CACHE=/mnt/.cache/
 export TRANSFORMERS_CACHE=/mnt/.cache/
 export HF_HOME=/mnt/.cache/
