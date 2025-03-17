@@ -251,6 +251,12 @@ unzip my.zip
 unzip my.zip -d /path/to/dir
 ```
 
+## tar
+
+```bash
+tar -cvf output.tar /path/to dir
+```
+
 ## yum
 
 ```bash
