@@ -18,4 +18,7 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 # uninstall w/ deps
 pip install pip-autoremove
 
+#
+# echo "cython<3.0" > c.txt
+PIP_CONSTRAINT=c.txt pip install
 ```
