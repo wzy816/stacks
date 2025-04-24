@@ -215,6 +215,10 @@ grep <file>
 # extended regex
 # ? + () {} |
 grep -E <file>
+
+# apt-get not enough space
+mv /var/cache/apt/ /mnt/
+ln -s /mnt/apt/ /var/cache/apt
 ```
 
 ## hexdump

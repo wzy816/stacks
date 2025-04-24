@@ -1,6 +1,8 @@
 # huggingface
 
 ```bash
+# huggingface-cli needs python > 3.7
+
 # install
 pip install --upgrade huggingface_hub
 

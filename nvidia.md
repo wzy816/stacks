@@ -8,6 +8,12 @@ apt install nvidia-cuda-toolkit
 
 # version
 nvcc --version
+
+# update nvcc
+# https://developer.nvidia.com/cuda-downloads
+sudo apt-get -y install cuda-toolkit-12-8
+# add PATH="/usr/local/cuda-12.8/bin:$PATH" to ~/.bashrc
+source ~/.bashrc
 ```
 
 ## driver

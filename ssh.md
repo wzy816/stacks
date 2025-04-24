@@ -9,12 +9,15 @@ chmod 400 ./.ssh/your_key
 
 ## ~/.ssh/config
 
-    Host *
-      ServerAliveInterval 5
-      UseKeychain yes
-      IdentityFile ~/.ssh/github
-      IdentityFile ~/.ssh/id_rsa
-      StrictHostKeyChecking no
+```txt
+Host *
+  ServerAliveInterval 5
+  UseKeychain yes
+  IdentityFile ~/.ssh/github
+  IdentityFile ~/.ssh/id_rsa
+  StrictHostKeyChecking no
+
+```
 
 ## /Users/[user]/Library/LaunchAgents/sync.git.plist
 
@@ -57,15 +60,17 @@ launchctl start sync.git
 ssh -i '/path/to/your/pem'  -o 'ProxyCommand=/usr/local/bin/ncat --proxy <proxy_ip>:<proxy_port> --proxy-type http %h %p' <user_name>@<ip>
 ```
 
-### login with key
+### linux ssh login with key
 
 ```bash
 # 1. generate or reuse local key pair
 ssh-keygen
+# private key -> ~/.ssh/id_rsa
+# publick key -> ~/.ssh/id_rsa.pub
 
 # 2. login to remote server with password
 
-# 3. copy local pub key to file /<username>/.ssh/authorized_keys
+# 3. copy pub key to file ~/.ssh/authorized_keys
 
 # 4. update /etc/ssh/sshd_config
 PubkeyAuthentication yes
@@ -81,4 +86,24 @@ ssh -i /path/to/private/key username@<ip>
 
 # 8. check log
 journalctl -u sshd.service -e
+
+```
+
+### mac ssh to remote ip with key
+
+```bash
+# 1. reuse local key pair
+# private key -> ~/.ssh/id_rsa
+# publick key -> ~/.ssh/id_rsa.pub
+
+# 2. copy public key string to remote ip ~/.ssh/authorized_keys
+
+# 3. update local ~/.ssh/config
+
+Host [ip]
+  HostName [ip]
+  User root
+  PreferredAuthentications publickey
+  IdentityFile "/path/to/private/key"
+
 ```
