@@ -203,23 +203,27 @@ while read name; do echo -en "$name\t"; git log --author="$name" --since==2020-0
 git log --author="?" --since==2020-01.01 --pretty=tformat: --numstat | grep src | grep -v assets/js | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }'
 ```
 
-## .gitconfig
+##
 
 ```bash
 # proxy
 git config --global url."https://hub.fgit.cf/".insteadOf "https://github.com/"
+
+# config user name and email for current repo
+git config user.name "Your New Username"
+git config user.email "your_new_email@example.com"
 ```
 
-```config
+```.gitconfig
 [push]
- 	default = simple
+  default = simple
 [user]
-	name = ?
-	email = ?@gmail.com
+ name = ?
+ email = ?@gmail.com
 [core]
     editor = vim
     compression = 0
-	pager = cat
+ pager = cat
 [alias]
     l = log --oneline --decorate --graph --all
     l5 = log --oneline --decorate --graph -5
