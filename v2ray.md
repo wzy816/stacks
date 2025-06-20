@@ -63,3 +63,12 @@ https://v2raytech.com/clash_template2.yaml
   alterId: 0
   cipher: auto
 ```
+
+## share clash in windows to device via windows hotspot, no clash TUN
+1. make sure windows clash working
+2. in clash, turn on allow WLAN, get port (default=7890)
+3. turn on windows mobile hotspot, share to WLAN
+4. cmd ipconfig, get ip of network adapter local area connection (ip sim. to 192.168.?.?, reset adapter if necessary)
+5. device WLAN connect to windows hotspot
+6. on device WLAN, config proxy to manual, set server to 192.168.?.? and port to 7890
+7. done
