@@ -23,7 +23,11 @@ export HF_HUB_DOWNLOAD_TIMEOUT=30
 export HUGGINGFACE_HUB_CACHE=/mnt/.cache/
 export TRANSFORMERS_CACHE=/mnt/.cache/
 export HF_HOME=/mnt/.cache/
+export HF_DATASETS_CACHE=/mnt/.cache/
 
 # download model (no hf_transfer)
 huggingface-cli download [username/repo_name]
+
+# download dataset
+huggingface-cli download [username/dataset_name] --repo-type dataset
 ```

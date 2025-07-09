@@ -15,6 +15,16 @@ mysql -uroot -p
 
 ```
 
+## on mac
+
+```bash
+HOMEBREW_NO_AUTO_UPDATE=1 brew install mysql
+brew services start mysql
+brew services stop mysql
+brew services restart mysql
+mysql -u root
+```
+
 ## start w/ docker
 
 ```

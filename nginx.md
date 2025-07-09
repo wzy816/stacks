@@ -34,7 +34,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
     listen 433 ssl;
-    root /data/project/dist;
+    root /data/project/dist; # don't use /root/
     index index.html;
     server_name \_;
     ssl_certificate "/etc/nginx/ssl/nginx.crt";
@@ -153,4 +153,34 @@ vim /usr/local/etc/nginx/nginx.conf
 
 # stop
 nginx -s stop
+```
+
+## simple auth
+
+```bash
+apt install htpasswd
+
+# create user
+sudo htpasswd -c /etc/apache2/.htpasswd user1
+sudo htpasswd /etc/apache2/.htpasswd user2
+
+# show 
+cat /etc/apache2/.htpasswd
+
+# nginx auth api
+location /api {
+    auth_basic           "Administrator’s Area";
+    auth_basic_user_file /etc/apache2/.htpasswd;
+}
+# nginx auth entire site except public
+
+server {
+    ...
+    auth_basic           "Administrator’s Area";
+    auth_basic_user_file conf/htpasswd;
+
+    location /public/ {
+        auth_basic off;
+    }
+}
 ```
