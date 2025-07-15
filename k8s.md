@@ -101,11 +101,23 @@ kubectl get serviceaccount
 # delete resources
 kubectl delete pod,service,deployment -n default --all
 
+# delete error pods
+kubectl delete pods --field-selector status.phase=Failed -n [namespace]
+
 # check api version
 kubectl api-versions
 
 # get cronjob
 kubectl get cronjob
+
+# show node status
+kubectl top node
+
+# delete job
+kubectl delete job [job-name] -n [namespace]
+
+# get jobs
+kubectl get jobs -n [namespace]
 ```
 
 ## node
