@@ -116,25 +116,3 @@ jenv add /Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home
 jenv versions
 jenv local 11.0
 ```
-
-## ~/sync.sh
-
-```bash
-#!/bin/bash
-
-echo `date`
-printf "\n"
-
-filenames=$(ls -d ~/data/*/*/.git)
-
-for name in $filenames
-do
-    cd $name
-    cd ..
-    pwd
-    git fetch origin
-    git fetch --all
-    git pull --all && git submodule update
-    printf "\n"
-done
-```
