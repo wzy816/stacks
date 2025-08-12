@@ -65,6 +65,7 @@ https://v2raytech.com/clash_template2.yaml
 ```
 
 ## share clash in windows to device via windows hotspot, no clash TUN
+
 1. make sure windows clash working
 2. in clash, turn on allow WLAN, get port (default=7890)
 3. turn on windows mobile hotspot, share to WLAN

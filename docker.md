@@ -53,6 +53,9 @@ docker container ls -a
 # run image
 docker run -d --name <container_name> --restart=always -v <server_dir>:<container_dir>  -p <server_port>:<container_port> <image>
 
+# run image iteractive
+docker run -it <image_name> sh
+
 # remove container
 docker container stop <container_name> && docker container rm <container_name>
 
@@ -82,7 +85,12 @@ docker load -i [path/to/image/file]
 ## logs
 
 ```bash
+
 docker logs <container_name>
+
+# show log strea
+docker logs -f <container_name>
+
 docker logs <container_name> --tail 100
 ```
 
