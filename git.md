@@ -203,7 +203,7 @@ while read name; do echo -en "$name\t"; git log --author="$name" --since==2020-0
 git log --author="?" --since==2020-01.01 --pretty=tformat: --numstat | grep src | grep -v assets/js | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }'
 ```
 
-##
+## config
 
 ```bash
 # proxy
@@ -214,7 +214,9 @@ git config user.name "Your New Username"
 git config user.email "your_new_email@example.com"
 ```
 
-```.gitconfig
+## .gitconfig
+
+```
 [push]
   default = simple
 [user]
