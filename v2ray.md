@@ -10,10 +10,6 @@
 bash <(curl -s -L https://git.io/v2ray-setup.sh)
 
 # 2. edit /etc/v2ray/config.json
-# change port to non-default
-# change streamSettings.network to tcp, delete kcp
-# change settings.clients.alterId to 64
-vim /etc/v2ray/config.json
 
 # 3. create systemd
 touch /etc/systemd/system/v2ray.service.d
@@ -44,7 +40,122 @@ systemctl disable firewalld
 # 6. update ECS firewall rule to allow port
 ```
 
-## client
+### server /etc/v2ray/config.json
+
+```json
+{
+    "log": {
+        "access": "/var/log/v2ray/access.log",
+        "error": "/var/log/v2ray/error.log",
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 0,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "",
+                        "level": 1,
+                        "alterId": 64
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {
+                "domainStrategy": "UseIP"
+            },
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {},
+            "tag": "blocked"
+        }
+    ],
+    "dns": {
+        "servers": [
+            "https+local://dns.google/dns-query",
+            "8.8.8.8",
+            "1.1.1.1",
+            "localhost"
+        ]
+    },
+    "routing": {
+        "domainStrategy": "IPOnDemand",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "blocked"
+            },
+            {
+                "type": "field",
+                "domain": [
+                    "domain:epochtimes.com",
+                    "domain:epochtimes.com.tw",
+                    "domain:epochtimes.fr",
+                    "domain:epochtimes.de",
+                    "domain:epochtimes.jp",
+                    "domain:epochtimes.ru",
+                    "domain:epochtimes.co.il",
+                    "domain:epochtimes.co.kr",
+                    "domain:epochtimes-romania.com",
+                    "domain:erabaru.net",
+                    "domain:lagranepoca.com",
+                    "domain:theepochtimes.com",
+                    "domain:ntdtv.com",
+                    "domain:ntd.tv",
+                    "domain:ntdtv-dc.com",
+                    "domain:ntdtv.com.tw",
+                    "domain:minghui.org",
+                    "domain:renminbao.com",
+                    "domain:dafahao.com",
+                    "domain:dongtaiwang.com",
+                    "domain:falundafa.org",
+                    "domain:wujieliulan.com",
+                    "domain:ninecommentaries.com",
+                    "domain:shenyun.com"
+                ],
+                "outboundTag": "blocked"
+            },
+            {
+                "type": "field",
+                "protocol": [
+                    "bittorrent"
+                ],
+                "outboundTag": "blocked"
+            }
+        ]
+    },
+    "transport": {
+        "kcpSettings": {
+            "uplinkCapacity": 100,
+            "downlinkCapacity": 100,
+            "congestion": true
+        }
+    }
+}
+```
+
+## client on mac
 
 ```bash
 # download clashX for mac
@@ -73,3 +184,85 @@ https://v2raytech.com/clash_template2.yaml
 5. device WLAN connect to windows hotspot
 6. on device WLAN, config proxy to manual, set server to 192.168.?.? and port to 7890
 7. done
+
+## client on unbuntu
+
+```bash
+# install v2ray
+# download v2ray-linux-64.zip to machine
+# download https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh to machine
+# in install-release.sh, update TMP_DIRECTORY to where zip file is, remove download_v2ray to skip download
+bash install-release.sh
+
+# update /usr/local/etc/v2ray/config.json
+
+# /etc/environment, add
+http_proxy="socks5://127.0.0.1:1080/"
+https_proxy="socks5://127.0.0.1:1080/"
+ftp_proxy="socks5://127.0.0.1:1080/"
+no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+# restart machine to allow process to use proxy inbounds
+
+sudo systemctl restart v2ray
+sudo systemctl status v2ray
+```
+
+### client /usr/local/etc/v2ray/config.json
+
+```json
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 1080,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "",
+                        "port": 0,
+                        "users": [
+                            {
+                                "id": "",
+                                "alterId": 0,
+                                "security": "auto",
+                                "level": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            "tag": "proxy"
+        },
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPOnDemand",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private",
+                    "geoip:cn"
+                ],
+                "outboundTag": "direct"
+            }
+        ]
+    }
+}
+```
