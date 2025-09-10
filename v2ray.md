@@ -197,9 +197,9 @@ bash install-release.sh
 # update /usr/local/etc/v2ray/config.json
 
 # /etc/environment, add
-http_proxy="socks5://127.0.0.1:1080/"
-https_proxy="socks5://127.0.0.1:1080/"
-ftp_proxy="socks5://127.0.0.1:1080/"
+http_proxy="http://127.0.0.1:1080/"
+https_proxy="http://127.0.0.1:1080/"
+ftp_proxy="http://127.0.0.1:1080/"
 no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
 
 # restart machine to allow process to use proxy inbounds
@@ -219,7 +219,7 @@ sudo systemctl status v2ray
         {
             "port": 1080,
             "listen": "127.0.0.1",
-            "protocol": "socks",
+            "protocol": "http",
             "settings": {
                 "udp": true
             }
