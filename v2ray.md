@@ -9,7 +9,7 @@
 # 1. install
 bash <(curl -s -L https://git.io/v2ray-setup.sh)
 
-# 2. edit /etc/v2ray/config.json
+# 2. update /etc/v2ray/config.json
 
 # 3. create systemd
 touch /etc/systemd/system/v2ray.service.d
@@ -51,12 +51,12 @@ systemctl disable firewalld
     },
     "inbounds": [
         {
-            "port": 0,
+            "port": 1234,
             "protocol": "vmess",
             "settings": {
                 "clients": [
                     {
-                        "id": "",
+                        "id": "xxxx",
                         "level": 1,
                         "alterId": 64
                     }
@@ -169,7 +169,7 @@ https://v2raytech.com/clash_template2.yaml
 - name: "v2ray"
   type: vmess
   server: 1.2.3.4
-  port: xxxx
+  port: 1234
   uuid: xxx
   alterId: 0
   cipher: auto
@@ -185,12 +185,12 @@ https://v2raytech.com/clash_template2.yaml
 6. on device WLAN, config proxy to manual, set server to 192.168.?.? and port to 7890
 7. done
 
-## client on unbuntu
+## client on unbuntu ECS
 
 ```bash
 # install v2ray
-# download v2ray-linux-64.zip to machine
-# download https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh to machine
+# download v2ray-linux-64.zip from https://github.com/v2ray/v2ray-core/releases to ECS
+# download https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh to ECS
 # in install-release.sh, update TMP_DIRECTORY to where zip file is, remove download_v2ray to skip download
 bash install-release.sh
 
@@ -231,11 +231,11 @@ sudo systemctl status v2ray
             "settings": {
                 "vnext": [
                     {
-                        "address": "",
-                        "port": 0,
+                        "address": "1.2.3.4",
+                        "port": 1234,
                         "users": [
                             {
-                                "id": "",
+                                "id": "xxxx",
                                 "alterId": 0,
                                 "security": "auto",
                                 "level": 0
