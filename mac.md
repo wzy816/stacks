@@ -100,6 +100,10 @@ git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.ustc
 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.zshrc
 source ~/.zshrc
 
+# fix error Downloading https://formulae.brew.sh/api/formula.jws.json
+rm -r "$(brew --cache)/api"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALL_FROM_API=1
 ```
 
 ## jenv
