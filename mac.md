@@ -129,3 +129,23 @@ jenv local 11.0
 export http_proxy="http://127.0.0.1:7890/"
 export https_proxy="http://127.0.0.1:7890/"
 ```
+
+## iterm2
+
+```bash
+# instal oh-my-zsh
+# https://github.com/ohmyzsh/ohmyzsh
+
+# install plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# in .zshrc, change plugins=(git) to 
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
+source ~/.zshrc
+
+# install powerlevel10k
+# https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
+
+# download https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes# i/master/schemes/Catppuccin%20Latte.itermcolors
+# in profile - color, import
+```
