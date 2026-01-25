@@ -58,7 +58,7 @@ systemctl disable firewalld
                     {
                         "id": "xxxx",
                         "level": 1,
-                        "alterId": 64
+                        "alterId": 0
                     }
                 ]
             },
@@ -265,4 +265,13 @@ sudo systemctl status v2ray
         ]
     }
 }
+```
+
+## error common/drain: common/drain: unable to drain connection > EOF > proxy/vmess/encoding: invalid user
+
+https://www.v2fly.org/guide/faq.html#vmess-invalid-user
+
+```bash
+- change AlterID to 0
+- if clash for windows, check windows system time alignment
 ```
