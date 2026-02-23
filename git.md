@@ -248,6 +248,9 @@ git config user.email "your_new_email@example.com"
     bomb= !git checkout --orphan newBranch && git add -A && git commit -m "init" && git branch -D main && git branch -m main && git push -f origin main && git gc --aggressive --prune=all &&:
 [color]
     ui = always
+
+[http]
+    proxy=http://[ip]:[port]
 ```
 
 ## lfs
