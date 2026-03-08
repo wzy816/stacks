@@ -293,3 +293,32 @@ git lfs push origin master
 # replace large file with lfs pointer
 git read-tree HEAD && GIT_LFS_SKIP_SMUDGE=1 git checkout -f HEAD
 ```
+
+## multiple github account
+
+```bash
+# 1. add key2 in github work account
+
+# 2. update ~/.ssh/config
+Host github.com
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/key1
+	IdentitiesOnly yes
+
+Host github-work
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/key2
+	IdentitiesOnly yes
+
+# 3. check ssh-agent
+ssh-add -l
+ssh-add ~/.ssh/key1
+ssh-add ~/.ssh/key2
+ssh -vT git@github.com
+ssh -vT git@github-work
+
+# 4. download work repo, change remote host
+git remote set-url origin git@github-work:[username]/[project].git
+```
