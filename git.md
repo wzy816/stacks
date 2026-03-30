@@ -58,6 +58,9 @@ git gc --aggressive --prune=all
 # update last commit message
 git commit --amend -m "<new_msg>"
 git push origin <branch> --force
+
+# rewrite commit username and email
+ git filter-branch -f --env-filter "GIT_AUTHOR_NAME='<new_username>'; GIT_AUTHOR_EMAIL='<new_email>'; GIT_COMMITTER_NAME='committed-name'; GIT_COMMITTER_EMAIL='committed-email';" HEAD
 ```
 
 ## diff
