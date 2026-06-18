@@ -107,3 +107,37 @@ Host [ip]
   IdentityFile "/path/to/private/key"
 
 ```
+
+### mac ssh to windows openssh with key
+
+```bash
+# 1. copy mac id_ed25519.pub to win C:\Users\{username}\.ssh\authorized_keys
+
+# 2. win settings, 应用\可选功能, 添加openssh
+
+# 3. edit win "C:\ProgramData\ssh\sshd_config"
+uncomment
+PubkeyAuthentication yes
+AuthorizedKeysFile	.ssh/authorized_keys
+PasswordAuthentication no
+
+comment out
+#Match Group administrators
+#       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys
+
+# 4. win, win+R services.msc, 启动 openssh 服务
+
+# 5. win, open shell, use ipconfig get ipv4 ip
+
+# 6. login, mac, ssh {username}@{win ipv4 ip}
+
+# 查看日志
+# win, win+R eventvwr, 应用程序和服务日志找到OpenSSH
+# mac 用verbose，ssh -vvv {username}@{win ipv4 ip}
+
+# 服务中无法启动 openssh 调试
+# win 用admin打开shell
+# 从服务找到openssh安装目录
+cd C:\Windows\System32\OpenSSH
+sshd.exe -d
+```
